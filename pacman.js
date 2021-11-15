@@ -17,7 +17,7 @@ var direction = 0;
 var focus = 0;
 
 // This function is called on mouse click. Every time it is called, it updates the PacMan image, position and direction on the screen.
-function Run() {
+function Run(pageWidth) {
   let img = document.getElementById('PacMan');
   let imgWidth = img.width;
   focus = (focus + 1) % 2;
@@ -32,7 +32,7 @@ function Run() {
   }
 }
 // TODO: Add a Javascript setInterval() method that will call the Run() function above every 200 milliseconds. Note: in the video, Dr. Williams uses the setTimeout() method, but here we are going to use a slightly different
-setInterval(Run, 200)
+setInterval(function() { Run(pageWidth); }, 200)
 // method called setInterval(), so that you can have practice using this method.
 // Inside of the Run() function you will also have to add an extra argument "pageWidth", which is declared on line 4 when you call the checkPageBounds() function below. 
 
@@ -40,13 +40,13 @@ setInterval(Run, 200)
 function checkPageBounds(direction, imgWidth, pos, pageWidth) {
   //
   // TODO: Complete this to reverse direction upon hitting screen edge
-  if(direction === 0) { //left to right
+  if(direction === 0){
     if(pos+imgWidth >= pageWidth) {
-      direction = 0; // change to right to left
+      direction = 1; // change to right to left
     }
   }else {
-    if(pos <= 0){
-      direction = 1
+    if(pos < 0){
+      direction = 0
     }
   }
   //
